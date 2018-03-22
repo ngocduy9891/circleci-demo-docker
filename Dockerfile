@@ -1,6 +1,20 @@
-FROM alpine:3.5
+#
+# Python Dockerfile
+#
+# https://github.com/dockerfile/python
+#
 
-ADD ./workdir/contacts /usr/bin/contacts
-ADD ./db/migrations /migrations
+# Pull base image.
+FROM dockerfile/ubuntu
 
-ENTRYPOINT contacts
+# Install Python.
+RUN \
+  apt-get update && \
+  apt-get install -y python python-dev python-pip python-virtualenv && \
+  rm -rf /var/lib/apt/lists/*
+
+# Define working directory.
+WORKDIR /data
+
+# Define default command.
+CMD ["bash"]
